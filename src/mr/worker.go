@@ -174,7 +174,7 @@ func (w *worker) getWorkerId() {
 	args := &GetWorkerIdArgs{}
 	reply := &GetWorkerIdReply{}
 	if ok := call("Coordinator.GetWorkerId", args, reply); !ok {
-		log.Fatal("getWorkerId fail")
+		DPrintf("getWorkerId fail")
 	}
 	w.id = reply.WorkerId
 }

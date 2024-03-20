@@ -1,7 +1,6 @@
 package mr
 
 import (
-	"errors"
 	"log"
 	"net"
 	"net/http"
@@ -124,10 +123,7 @@ func (c *Coordinator) updateTaskState(args *GetTaskArgs, task *Task) {
 
 // Your code here -- RPC handlers for the worker to call.
 func (c *Coordinator) GetTask(args *GetTaskArgs, reply *GetTaskReply) error {
-	task, ok := <-c.taskCh
-	if !ok {
-		return errors.New("taskCh is closed")
-	}
+	task := <-c.taskCh
 	reply.Task = &task
 
 	if task.Alive {
